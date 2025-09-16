@@ -26,7 +26,7 @@ jobs:
         shell: cmd
         run: |
           if not exist build mkdir build
-          cl /O2 /EHsc /std:c++17 /W4 /MD /Fe:build\WinCopyLink.exe WinCopyLink\WinCopyLink.cpp
+          cl /O2 /EHsc /std:c++17 /W4 /MT /link User32.lib /Fe:build\WinCopyLink.exe WinCopyLink\WinCopyLink.cpp
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
