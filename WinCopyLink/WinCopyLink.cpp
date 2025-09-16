@@ -72,7 +72,7 @@ int main(int argc, char* argv[]) {
     // Build CF_HTML block
     std::string cfHtml = MakeCfHtml(frag);
     // Plain-text fallback
-    std::string plain = txt + " (" + url + ")";
+    std::string plain = "[" + txt + "](" + url + ")";
 
     if (!OpenClipboard(nullptr)) {
         std::cerr << "Error: could not open clipboard\n";
