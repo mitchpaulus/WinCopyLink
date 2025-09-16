@@ -105,4 +105,3 @@ int main(int argc, char* argv[]) {
     CloseClipboard();
     return 0;
 }
-

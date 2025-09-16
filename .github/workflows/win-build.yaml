@@ -1,0 +1,34 @@
+name: Build (Windows MSVC)
+
+on:
+  push:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Put the MSVC toolchain (cl/link) on PATH
+      - name: MSVC Dev Cmd
+        uses: ilammy/msvc-dev-cmd@v1
+
+      # Compile with MSVC.
+      # - /O2        Optimize
+      # - /EHsc      Standard C++ exceptions model
+      # - /std:c++17 Choose your C++ standard (c++20/c++23 if you want)
+      # - /W4        Warnings level
+      # - /MD        Link against the dynamic runtime (switch to /MT for static CRT)
+      # - /Fe        Output exe name
+      - name: Build
+        shell: cmd
+        run: |
+          if not exist build mkdir build
+          cl /O2 /EHsc /std:c++17 /W4 /MT /Fe:build\WinCopyLink.exe WinCopyLink\WinCopyLink.cpp /link User32.lib
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WinCopyLink.exe
+          path: build\WinCopyLink.exe
