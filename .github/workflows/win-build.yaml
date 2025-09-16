@@ -2,7 +2,6 @@ name: Build (Windows MSVC)
 
 on:
   push:
-  pull_request:
 
 jobs:
   build-windows:
@@ -26,7 +25,7 @@ jobs:
         shell: cmd
         run: |
           if not exist build mkdir build
-          cl /O2 /EHsc /std:c++17 /W4 /MT /link User32.lib /Fe:build\WinCopyLink.exe WinCopyLink\WinCopyLink.cpp
+          cl /O2 /EHsc /std:c++17 /W4 /MT /Fe:build\WinCopyLink.exe WinCopyLink\WinCopyLink.cpp /link User32.lib
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
